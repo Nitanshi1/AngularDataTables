@@ -1,0 +1,54 @@
+<div class="w-full shadow-md p-10 bg-white shadow-blue-200/20 mx-36 my-10">
+    <div class="flex justify-between items-center mb-4 mt-4">
+      <input type="text" placeholder="Search" class="w-full border p-2 rounded-lg" #filter (keyup)="filterData(filter.value)">
+      <select class="border p-2 rounded-lg ml-4" #pageSize (change)="changePageSize(pageSize.value)">
+        <option *ngFor="let size of pageSizes" [value]="size">{{size}}</option>
+      </select>
+    </div>
+  
+    <table class="w-full border-collapse">
+      <thead>
+        <tr>
+          <th class="p-3 text-left bg-blue-200 border">#</th>
+          <th class="p-3 text-left bg-blue-200 border">Supplier</th>
+          <th class="p-3 text-left bg-blue-200 border">Address</th>
+          <th class="p-3 text-left bg-blue-200 border">E-Mail</th>
+          <th class="p-3 text-left bg-blue-200 border">Phone</th>
+          <th class="p-3 text-left bg-blue-200 border">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border" *ngFor="let supplier of visibleData(); let i=index">
+          <td class="p-3 border">{{i+1}}</td>
+          <td class="p-3 border">{{supplier.name}}</td>
+          <td class="p-3 border">{{supplier.address}}</td>
+          <td class="p-3 border">{{supplier.email}}</td>
+          <td class="p-3 border">{{supplier.phone}}</td>
+          <td class="p-3 border"></td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="mt-4 flex items-center justify-center space-x-2">
+      <button 
+      class="text-cyan-500 border-4 py-2 px-4 rounded-l-lg cursor-pointer"
+      (click)="previousPage()"
+      >Previous</button>
+
+
+      <button 
+      *ngFor="let pageNumber of pageNumbers(); let i=index"
+      class="py-2 px-4 cursor-pointer"
+      [class.bg-cyan-500] = "i+1 == currentPage"
+      [class.text-white] = "i+1 == currentPage"
+      (click)="changePage(i+1)"
+      > {{i+1}}
+     </button>
+      
+      <button 
+      class="text-cyan-500 border-4 py-2 px-4 cursor-pointer rounded-r-lg"
+      (click)="nextPage()"
+      >Next</button>
+    </div>
+  </div>
+  
