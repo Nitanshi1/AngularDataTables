@@ -1,7 +1,7 @@
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { Component,OnInit } from '@angular/core';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
-
+//changing
 interface Supplier{
   name: string,
   address: string,
